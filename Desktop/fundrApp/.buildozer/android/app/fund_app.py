@@ -81,7 +81,17 @@ class SecondScreen(Screen):
         bg = Image(source='/home/hadeel/shared/fundd.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
-        layout = GridLayout(cols=2, spacing=10, padding=10)
+        self.cols = 2  # Number of columns in the grid
+        self.rows = 2  # Number of rows in the grid
+        
+        # Assuming you have 2 columns and 2 rows, adjust as needed
+        screen_width, screen_height = Window.size
+        column_width = screen_width / self.cols
+        row_height = screen_height / self.rows
+        
+
+        layout = GridLayout(cols=self.cols, spacing=10, padding=10,
+                            size_hint=(1, 1)) 
         self.add_widget(layout)
 
         # Loop to create the image and button pairs
@@ -89,7 +99,7 @@ class SecondScreen(Screen):
             self.counters[f'counter_{i}'] = 0  # Initialize the counter
 
             framed_layout = FloatLayout(size_hint=(None, None), size=(
-                240, 400))  # Slightly larger to accommodate the frame
+                column_width, row_height))  # Slightly larger to accommodate the frame
             # Add a black frame to the layout
             self.add_black_frame(framed_layout)
 
@@ -185,6 +195,8 @@ class SecondScreen(Screen):
 
             framed_layout.add_widget(image_layout)
             layout.add_widget(framed_layout)
+
+        
 
         # Menu button at the bottom
         menu_button = Button(
