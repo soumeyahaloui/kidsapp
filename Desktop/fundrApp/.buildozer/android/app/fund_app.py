@@ -35,7 +35,7 @@ class FirstScreen(Screen):
     def __init__(self, **kwargs):
         super(FirstScreen, self).__init__(**kwargs)
 
-        bg = Image(source='/home/hadeel/shared/fundr.png',
+        bg = Image(source='images/fundr.png',
                    allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
@@ -78,7 +78,7 @@ class SecondScreen(Screen):
         self.frame_data_map = {i: i for i in range(1, 5)}
 
         # Background image
-        bg = Image(source='/home/hadeel/shared/fundd.png', allow_stretch=True, keep_ratio=False)
+        bg = Image(source='images/fund.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
         self.cols = 2  # Number of columns in the grid
@@ -479,7 +479,7 @@ class BeneficiaryScreen(Screen):
     def __init__(self, **kwargs):
         super(BeneficiaryScreen, self).__init__(**kwargs)
 
-        bg = Image(source='/home/hadeel/shared/fundr.png', allow_stretch=True, keep_ratio=False)
+        bg = Image(source='images/fundr.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
         # Initialize ScrollView and GridLayout
@@ -580,6 +580,5 @@ class MyApp(App):
         sm.add_widget(FirstScreen(name='first'))
         sm.add_widget(SecondScreen(name='second'))
         sm.add_widget(BeneficiaryScreen(name='beneficiary'))
-        self.icon = '/home/hadeel/shared/fundrr.ico'
-
+        self.icon = 'images/fundrr.ico'
         return sm
