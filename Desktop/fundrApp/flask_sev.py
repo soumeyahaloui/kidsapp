@@ -11,7 +11,7 @@ def get_database_connection() -> pymysql.connections.Connection:
     return pymysql.connect(
         host="sql6.freesqldatabase.com",  # Replace with the host from the email.
         user="sql6679269",  # Replace with the username from the email.
-        password="NyUU7ZzQHz",  # Replace with the password from the email.
+        password="NyUU72zQHz",  # Replace with the password from the email.
         db="sql6679269",  # Replace with the database name from the email.
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor
