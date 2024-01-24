@@ -25,6 +25,8 @@
 
     <!-- Set permissions -->
     
+        <uses-permission android:name="android.permission.INTERNET" />
+    
 
     
 
