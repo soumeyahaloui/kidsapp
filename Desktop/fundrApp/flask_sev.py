@@ -2,8 +2,13 @@ from flask import Flask, jsonify
 import pymysql
 import pymysql.cursors
 import traceback
+import logging
+import traceback
 
 app = Flask(__name__)
+
+logging.basicConfig(level=logging.DEBUG)
+
 
 # Type annotations can clarify what the function returns, in this case, a pymysql connection object.
 def get_database_connection() -> pymysql.connections.Connection:
@@ -22,21 +27,26 @@ def get_data():
     # No changes required here unless the table name changes.
     connection = get_database_connection()
     try:
+        logging.info("Connected to the database successfully.")
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM fundr_alx")
             result = cursor.fetchall()
             return jsonify(result)
     except Exception as e:
+        logging.error(f"Error: {e}")
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
     finally:
         connection.close()
+        logging.info("Database connection closed.")
+
 
 
 @app.route('/get_family_data/<int:family_id>', methods=['GET'])
 def get_family_data(family_id):
     connection = get_database_connection()
     try:
+        logging.info("Connected to the database successfully.")
         with connection.cursor() as cursor:
             # Query to select a specific family by ID
             query = "SELECT * FROM fundr_alx WHERE ID = %s"
@@ -47,10 +57,13 @@ def get_family_data(family_id):
             else:
                 return jsonify({"error": "Family not found"}), 404
     except Exception as e:
+        logging.error(f"Error: {e}")
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
     finally:
         connection.close()
+        logging.info("Database connection closed.")
+
 
 
 if __name__ == '__main__':

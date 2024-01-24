@@ -58,4 +58,4 @@ VALUES (
         'The Jeem'
     );
 SELECT *
-FROM fundr_alx;
+FROM fundr_alx;USE sql6679269;

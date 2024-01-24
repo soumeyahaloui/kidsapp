@@ -14,7 +14,8 @@ from kivy.uix.boxlayout import BoxLayout
 import json
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
-import pymysql
+import logging
+import traceback
 
 class LabelB(Label):
     def __init__(self, **kwargs):
@@ -213,6 +214,8 @@ class SecondScreen(Screen):
         UrlRequest('http://localhost:5000/get_data', self.on_request_success)
 
     def on_request_success(self, request, result):
+        logging.info("Request to Flask server successful.")
+
         # Assuming result is a list of dictionaries with keys 'ID', 'Image', 'Amount', 'Details'
         for i, data in enumerate(result):
             image_widget = self.widget_ids.get(f'image_{i+1}')
@@ -437,6 +440,8 @@ class SecondScreen(Screen):
         print(f"New family set fetched for frame {counter_key}: {data}")
 
     def on_request_error(self, request, error):
+        logging.error(f"Request to Flask server error: {error}")
+        traceback.print_exc()
         print("Error fetching total sets:", error)
         # Handle the error as needed, e.g., set a default value or show a message
 
