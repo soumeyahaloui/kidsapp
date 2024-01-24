@@ -1,3 +1,5 @@
+USE sql6679269;
+
 -- Creating the table
 CREATE TABLE fundr_alx (
     ID VARCHAR(255),

@@ -1,24 +1,25 @@
 from flask import Flask, jsonify
 import pymysql
+import pymysql.cursors
 import traceback
 
 app = Flask(__name__)
 
-
-def get_database_connection():
-    # Update with your database credentials
+# Type annotations can clarify what the function returns, in this case, a pymysql connection object.
+def get_database_connection() -> pymysql.connections.Connection:
+    # Use the details from your cloud database service.
     return pymysql.connect(
-        host="localhost",
-        user="root",
-        password="@n@ALX2024",
-        db="alx_dola",
+        host="sql6.freesqldatabase.com",  # Replace with the host from the email.
+        user="sql6679269",  # Replace with the username from the email.
+        password="NyUU7ZzQHz",  # Replace with the password from the email.
+        db="sql6679269",  # Replace with the database name from the email.
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor
     )
 
-
 @app.route('/get_data', methods=['GET'])
 def get_data():
+    # No changes required here unless the table name changes.
     connection = get_database_connection()
     try:
         with connection.cursor() as cursor:
