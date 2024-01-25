@@ -16,6 +16,11 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 import logging
 import traceback
+from kivy.loader import Loader
+from kivy.uix.image import AsyncImage
+
+
+
 
 class LabelB(Label):
     def __init__(self, **kwargs):
@@ -36,8 +41,9 @@ class FirstScreen(Screen):
     def __init__(self, **kwargs):
         super(FirstScreen, self).__init__(**kwargs)
 
-        bg = Image(source='images/fundr.png',
-                   allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='https://cdn.glitch.global/53883c99-cc30-4656-9386-14bc8357b85c/fundr.png?v=1706210211746',
+                allow_stretch=True,
+                keep_ratio=False)
         self.add_widget(bg)
 
         # Using FloatLayout for flexibility in positioning
@@ -78,8 +84,9 @@ class SecondScreen(Screen):
         # Maps frame to family ID
         self.frame_data_map = {i: i for i in range(1, 5)}
 
-        # Background image
-        bg = Image(source='images/fund.png', allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='https://cdn.glitch.global/53883c99-cc30-4656-9386-14bc8357b85c/fundd.png?v=1706210860343',
+                allow_stretch=True,
+                keep_ratio=False)
         self.add_widget(bg)
 
         self.cols = 2  # Number of columns in the grid
@@ -211,20 +218,39 @@ class SecondScreen(Screen):
         # Don't forget to add the main layout to the screen
 
     def fetch_data(self):
-        UrlRequest('http://192.168.1.5:5000/get_data', self.on_request_success)
+        # Replace 'http://localhost:5000/get_data' with your Glitch app's URL
+        url = 'https://magnificent-pepper-fan.glitch.me/get_data'
+        UrlRequest(url, self.on_request_success)
+
 
     def on_request_success(self, request, result):
         logging.info("Request to Flask server successful.")
+        logging.info(f"Data received: {result}")
 
-        # Assuming result is a list of dictionaries with keys 'ID', 'Image', 'Amount', 'Details'
-        for i, data in enumerate(result):
-            image_widget = self.widget_ids.get(f'image_{i+1}')
-            top_text_widget = self.widget_ids.get(f'top_text_{i+1}')
+        # Ensure result is a list and has at least one item.
+        if isinstance(result, list) and len(result) > 0:
+            # Update your widgets here.
+            self.update_ui_with_data(result)
+        else:
+            logging.error("Data received is not in the expected format or is empty.")
 
-            if image_widget:
-                image_widget.source = data['Image']
-            if top_text_widget:
-                top_text_widget.text = f"Goal: {data['Amount']}"
+    def update_ui_with_data(self, data):
+    # Ensure 'data' is a list of dictionaries and has items.
+        if isinstance(data, list) and len(data) > 0:
+            for i, data_item in enumerate(data):
+                # Limit the number of items to process based on the UI's capacity.
+                if i < 4:  # Assuming there are 4 slots to display the data.
+                    image_widget = self.widget_ids.get(f'image_{i+1}')
+                    top_text_widget = self.widget_ids.get(f'top_text_{i+1}')
+
+                    if image_widget and 'Image' in data_item:
+                        image_widget.source = data_item['Image']
+                    if top_text_widget and 'Amount' in data_item:
+                        top_text_widget.text = f"Goal: {data_item['Amount']}"
+        else:
+            logging.error("Data received is not in the expected format or is empty.")
+
+
 
     def open_menu(self, button):
         # Create a new DropDown each time the menu is opened
@@ -476,15 +502,21 @@ class SecondScreen(Screen):
         self.last_fetched_family_id += 1  # Increment to fetch the next family
         next_family_id = self.last_fetched_family_id
 
-        UrlRequest(f'http://192.168.1.5:5000/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(
-            f'counter_{self.available_frames.pop(0)}', res), on_error=self.on_request_error, on_failure=self.on_request_error)
+        # Replace 'http://localhost:5000' with the base URL of your deployed Flask app
+        base_url = 'https://magnificent-pepper-fan.glitch.me'
+
+        # Use the base URL in the UrlRequest
+        UrlRequest(f'{base_url}/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(f'counter_{self.available_frames.pop(0)}', res), on_error=self.on_request_error, on_failure=self.on_request_error)
+
 
 
 class BeneficiaryScreen(Screen):
     def __init__(self, **kwargs):
         super(BeneficiaryScreen, self).__init__(**kwargs)
 
-        bg = Image(source='images/fundr.png', allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='https://cdn.glitch.global/53883c99-cc30-4656-9386-14bc8357b85c/fundd.png?v=1706210860343',
+                allow_stretch=True,
+                keep_ratio=False)
         self.add_widget(bg)
 
         # Initialize ScrollView and GridLayout
@@ -585,5 +617,5 @@ class MyApp(App):
         sm.add_widget(FirstScreen(name='first'))
         sm.add_widget(SecondScreen(name='second'))
         sm.add_widget(BeneficiaryScreen(name='beneficiary'))
-        self.icon = 'images/fundrr.ico'
+        self.icon = 'https://cdn.glitch.global/53883c99-cc30-4656-9386-14bc8357b85c/fundrr.ico?v=1706210215068'
         return sm
