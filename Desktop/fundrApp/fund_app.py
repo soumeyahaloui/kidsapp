@@ -211,7 +211,7 @@ class SecondScreen(Screen):
         # Don't forget to add the main layout to the screen
 
     def fetch_data(self):
-        UrlRequest('http://localhost:5000/get_data', self.on_request_success)
+        UrlRequest('http://192.168.1.5:5000/get_data', self.on_request_success)
 
     def on_request_success(self, request, result):
         logging.info("Request to Flask server successful.")
@@ -476,7 +476,7 @@ class SecondScreen(Screen):
         self.last_fetched_family_id += 1  # Increment to fetch the next family
         next_family_id = self.last_fetched_family_id
 
-        UrlRequest(f'http://localhost:5000/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(
+        UrlRequest(f'http://192.168.1.5:5000/get_family_data/{next_family_id}', on_success=lambda req, res: self.update_frame_with_new_data(
             f'counter_{self.available_frames.pop(0)}', res), on_error=self.on_request_error, on_failure=self.on_request_error)
 
 
