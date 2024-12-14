@@ -62,15 +62,15 @@ _decimal _decimal/_decimal.c
 # compression libs and binascii (optional CRC32 from zlib)
 # bindings need -lbz2, -lz, or -llzma, respectively
 binascii binascii.c
-#_bz2 _bz2module.c
-_lzma _lzmamodule.c
+_bz2 _bz2module.c
+#_lzma _lzmamodule.c
 zlib zlibmodule.c
 
 # dbm/gdbm
 # dbm needs either libndbm, libgdbm_compat, or libdb 5.x
 #@MODULE__DBM_TRUE@_dbm _dbmmodule.c
 # gdbm module needs -lgdbm
-#_gdbm _gdbmmodule.c
+_gdbm _gdbmmodule.c
 
 # needs -lreadline or -leditline, sometimes termcap, termlib, or tinfo
 #@MODULE_READLINE_TRUE@readline readline.c
@@ -114,7 +114,7 @@ grp grpmodule.c
 mmap mmapmodule.c
 # FreeBSD: nis/yp APIs are in libc
 # Linux: glibc has deprecated SUN RPC, APIs are in libnsl and libtirpc (bpo-32521)
-nis nismodule.c
+#nis nismodule.c
 # needs sys/soundcard.h or linux/soundcard.h (Linux, FreeBSD)
 ossaudiodev ossaudiodev.c
 _posixsubprocess _posixsubprocess.c
@@ -143,7 +143,7 @@ _multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
 # needs -lncurses and -lpanel
 #@MODULE__CURSES_PANEL_TRUE@_curses_panel _curses_panel.c
 
-#_sqlite3 _sqlite/blob.c _sqlite/connection.c _sqlite/cursor.c _sqlite/microprotocols.c _sqlite/module.c _sqlite/prepare_protocol.c _sqlite/row.c _sqlite/statement.c _sqlite/util.c
+_sqlite3 _sqlite/blob.c _sqlite/connection.c _sqlite/cursor.c _sqlite/microprotocols.c _sqlite/module.c _sqlite/prepare_protocol.c _sqlite/row.c _sqlite/statement.c _sqlite/util.c
 
 # needs -lssl and -lcrypt
 _ssl _ssl.c

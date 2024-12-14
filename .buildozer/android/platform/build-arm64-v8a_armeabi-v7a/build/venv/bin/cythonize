@@ -1,4 +1,6 @@
-#!/home/hadeel/Desktop/fundrApp/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/venv/bin/python
+#!/bin/sh
+'''exec' /home/hadeel/Desktop/appvoc/fundraising-application/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/venv/bin/python "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

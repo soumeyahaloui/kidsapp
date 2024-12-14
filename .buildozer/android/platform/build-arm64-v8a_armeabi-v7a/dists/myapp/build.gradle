@@ -23,7 +23,7 @@ apply plugin: 'com.android.application'
 android {
     namespace 'org.test.myapp'
     compileSdkVersion 31
-    buildToolsVersion '34.0.0'
+    buildToolsVersion '36.0.0-rc1'
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31

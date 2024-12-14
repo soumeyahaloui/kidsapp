@@ -29,10 +29,10 @@ MODLIBS=           $(LOCALMODLIBS) $(BASEMODLIBS)
 
 # === Variables set by configure
 VERSION=	3.11
-srcdir=		/home/hadeel/Desktop/fundrApp/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
-VPATH=		/home/hadeel/Desktop/fundrApp/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
-abs_srcdir=	/home/hadeel/Desktop/fundrApp/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
-abs_builddir=	/home/hadeel/Desktop/fundrApp/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build
+srcdir=		/home/hadeel/Desktop/appvoc/fundraising-application/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
+VPATH=		/home/hadeel/Desktop/appvoc/fundraising-application/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
+abs_srcdir=	/home/hadeel/Desktop/appvoc/fundraising-application/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3
+abs_builddir=	/home/hadeel/Desktop/appvoc/fundraising-application/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build
 
 
 CC=		gcc
@@ -212,7 +212,7 @@ LIBEXPAT_A= Modules/expat/libexpat.a
 
 # OpenSSL options for setup.py so sysconfig can pick up AC_SUBST() vars.
 OPENSSL_INCLUDES=
-OPENSSL_LIBS=-lssl -lcrypto
+OPENSSL_LIBS=-lssl -lcrypto 
 OPENSSL_LDFLAGS=
 OPENSSL_RPATH=
 
@@ -299,32 +299,34 @@ MODULE__BLAKE2_CFLAGS=
 MODULE__BLAKE2_LDFLAGS=
 MODULE__CRYPT_STATE=yes
 MODULE__CRYPT_CFLAGS=
-MODULE__CRYPT_LDFLAGS=-lcrypt
+MODULE__CRYPT_LDFLAGS=-lcrypt 
 MODULE__DECIMAL_STATE=yes
 MODULE__DECIMAL_CFLAGS=-I$(srcdir)/Modules/_decimal/libmpdec -DCONFIG_64=1 -DANSI=1 -DHAVE_UINT128_T=1
 MODULE__DECIMAL_LDFLAGS=-lm $(LIBMPDEC_A)
-MODULE__GDBM_STATE=missing
-MODULE_NIS_STATE=yes
-MODULE_NIS_CFLAGS=-I/usr/include/tirpc
-MODULE_NIS_LDFLAGS=-lnsl -ltirpc
-MODULE__SQLITE3_STATE=disabled
+MODULE__GDBM_STATE=yes
+MODULE__GDBM_CFLAGS=
+MODULE__GDBM_LDFLAGS=-lgdbm
+MODULE_NIS_STATE=missing
+MODULE__SQLITE3_STATE=yes
+MODULE__SQLITE3_CFLAGS= -I$(srcdir)/Modules/_sqlite
+MODULE__SQLITE3_LDFLAGS=-lsqlite3 
 MODULE__TKINTER_STATE=missing
 MODULE__UUID_STATE=yes
-MODULE__UUID_CFLAGS=-I/usr/include/uuid
-MODULE__UUID_LDFLAGS=-luuid
+MODULE__UUID_CFLAGS=-I/usr/include/uuid 
+MODULE__UUID_LDFLAGS=-luuid 
 MODULE_ZLIB_STATE=yes
 MODULE_ZLIB_CFLAGS=
-MODULE_ZLIB_LDFLAGS=-lz
+MODULE_ZLIB_LDFLAGS=-lz 
 MODULE_BINASCII_STATE=yes
 MODULE_BINASCII_CFLAGS=-DUSE_ZLIB_CRC32 
-MODULE_BINASCII_LDFLAGS=-lz
-MODULE__BZ2_STATE=missing
-MODULE__LZMA_STATE=yes
-MODULE__LZMA_CFLAGS=
-MODULE__LZMA_LDFLAGS=-llzma
+MODULE_BINASCII_LDFLAGS=-lz 
+MODULE__BZ2_STATE=yes
+MODULE__BZ2_CFLAGS=
+MODULE__BZ2_LDFLAGS=-lbz2
+MODULE__LZMA_STATE=missing
 MODULE__SSL_STATE=yes
 MODULE__SSL_CFLAGS=
-MODULE__SSL_LDFLAGS=  -lssl -lcrypto
+MODULE__SSL_LDFLAGS=  -lssl -lcrypto 
 MODULE__HASHLIB_STATE=yes
 MODULE__HASHLIB_CFLAGS=
 MODULE__HASHLIB_LDFLAGS=   -lcrypto
