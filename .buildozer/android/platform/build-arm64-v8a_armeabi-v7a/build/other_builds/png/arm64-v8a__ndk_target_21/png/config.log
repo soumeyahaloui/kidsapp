@@ -477,7 +477,7 @@ conftest.c:48:6: note: 'pow' is a builtin with type 'double (double, double)'
 1 warning generated.
 ld: error: undefined symbol: pow
 >>> referenced by conftest.c
->>>               /tmp/conftest-274888.o:(main)
+>>>               /tmp/conftest-4cf10d.o:(main)
 clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:13016: $? = 1
 configure: failed program was:
