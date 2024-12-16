@@ -18,7 +18,7 @@ class FirstScreen(Screen):
         super(FirstScreen, self).__init__(**kwargs)
 
         # Background image
-        bg = AsyncImage(source='bubbles.png', allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='assets/images/backgrounds/bubbles.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
         layout = FloatLayout()
@@ -45,7 +45,7 @@ class SecondScreen(Screen):
         super(SecondScreen, self).__init__(**kwargs)
 
         # Background image
-        bg = AsyncImage(source='purple.png', allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='assets/images/backgrounds/purple.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
         layout = FloatLayout()
@@ -80,7 +80,6 @@ class SecondScreen(Screen):
             self.manager.current = 'animals'
 
 
-
 class AnimalScreen(Screen):
     def __init__(self, **kwargs):
         super(AnimalScreen, self).__init__(**kwargs)
@@ -89,7 +88,7 @@ class AnimalScreen(Screen):
         pygame.mixer.init()
 
         # Background image (galaxy.png)
-        bg = AsyncImage(source='galaxy.png', allow_stretch=True, keep_ratio=False)
+        bg = AsyncImage(source='assets/images/backgrounds/galaxy.png', allow_stretch=True, keep_ratio=False)
         self.add_widget(bg)
 
         # Main layout: Vertical Box for all animal cards
@@ -103,12 +102,11 @@ class AnimalScreen(Screen):
 
         # Animal data
         animals = [
-            {"name_ar": "أسد", "name_fr": "Lion", "image": "lion.png", "audio_ar": "audio/lion_ar.mp3", "audio_fr": "audio/lion_fr.mp3"},
-            {"name_ar": "فيل", "name_fr": "Éléphant", "image": "elephant.png", "audio_ar": "audio/elephant_ar.mp3", "audio_fr": "audio/elephant_fr.mp3"},
-            {"name_ar": "قرد", "name_fr": "Singe", "image": "monkey.png", "audio_ar": "audio/monkey_ar.mp3", "audio_fr": "audio/monkey_fr.mp3"},
-            {"name_ar": "نمر", "name_fr": "Tigre", "image": "tiger.png", "audio_ar": "audio/tiger_ar.mp3", "audio_fr": "audio/tiger_fr.mp3"}
+            {"name_ar": "أسد", "name_fr": "Lion", "image": "assets/images/animals/lion.png", "audio_ar": "assets/audio/ar/lion_ar.mp3", "audio_fr": "assets/audio/fr/lion_fr.mp3"},
+            {"name_ar": "فيل", "name_fr": "Éléphant", "image": "assets/images/animals/elephant.png", "audio_ar": "assets/audio/ar/elephant_ar.mp3", "audio_fr": "assets/audio/fr/elephant_fr.mp3"},
+            {"name_ar": "قرد", "name_fr": "Singe", "image": "assets/images/animals/monkey.png", "audio_ar": "assets/audio/ar/monkey_ar.mp3", "audio_fr": "assets/audio/fr/monkey_fr.mp3"},
+            {"name_ar": "نمر", "name_fr": "Tigre", "image": "assets/images/animals/tiger.png", "audio_ar": "assets/audio/ar/tiger_ar.mp3", "audio_fr": "assets/audio/fr/tiger_fr.mp3"}
         ]
-
 
         # Add a card for each animal
         for animal in animals:
@@ -155,8 +153,6 @@ class AnimalScreen(Screen):
             print(f"Error playing audio: {e}")
 
 
-
-
 class MyApp(App):
     def build(self):
         sm = ScreenManager()
@@ -164,7 +160,7 @@ class MyApp(App):
         sm.add_widget(SecondScreen(name='second'))
         sm.add_widget(AnimalScreen(name='animals'))
 
-        self.icon = 'icon.ico'
+        self.icon = 'assets/images/icon/appkidicon.png'
         return sm
 
 
