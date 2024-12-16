@@ -7,6 +7,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.resources import resource_find
 from gtts import gTTS
 import pygame
 import os
@@ -102,11 +103,12 @@ class AnimalScreen(Screen):
 
         # Animal data
         animals = [
-            {"name_ar": "أسد", "name_fr": "Lion", "image": "lion.png", "audio_ar": "lion_ar.mp3", "audio_fr": "lion_fr.mp3"},
-            {"name_ar": "فيل", "name_fr": "Éléphant", "image": "elephant.png", "audio_ar": "elephant_ar.mp3", "audio_fr": "elephant_fr.mp3"},
-            {"name_ar": "قرد", "name_fr": "Singe", "image": "monkey.png", "audio_ar": "monkey_ar.mp3", "audio_fr": "monkey_fr.mp3"},
-            {"name_ar": "نمر", "name_fr": "Tigre", "image": "tiger.png", "audio_ar": "tiger_ar.mp3", "audio_fr": "tiger_fr.mp3"}
+            {"name_ar": "أسد", "name_fr": "Lion", "image": "lion.png", "audio_ar": "audio/lion_ar.mp3", "audio_fr": "audio/lion_fr.mp3"},
+            {"name_ar": "فيل", "name_fr": "Éléphant", "image": "elephant.png", "audio_ar": "audio/elephant_ar.mp3", "audio_fr": "audio/elephant_fr.mp3"},
+            {"name_ar": "قرد", "name_fr": "Singe", "image": "monkey.png", "audio_ar": "audio/monkey_ar.mp3", "audio_fr": "audio/monkey_fr.mp3"},
+            {"name_ar": "نمر", "name_fr": "Tigre", "image": "tiger.png", "audio_ar": "audio/tiger_ar.mp3", "audio_fr": "audio/tiger_fr.mp3"}
         ]
+
 
         # Add a card for each animal
         for animal in animals:
@@ -132,7 +134,9 @@ class AnimalScreen(Screen):
 
     def play_audio(self, audio_file):
         try:
-            if not os.path.exists(audio_file):
+            # Use resource_find to get the correct file path
+            audio_path = resource_find(audio_file)
+            if not audio_path:
                 print(f"Audio file not found: {audio_file}")
                 return
 
@@ -140,7 +144,7 @@ class AnimalScreen(Screen):
             pygame.mixer.music.stop()
 
             # Load and play the audio file
-            pygame.mixer.music.load(audio_file)
+            pygame.mixer.music.load(audio_path)
             pygame.mixer.music.play()
 
             # Wait until the audio finishes playing

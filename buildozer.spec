@@ -37,7 +37,8 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3==3.10,kivy,pygame==2.1.0,gTTS
+requirements = python3==3.10.0,kivy,pygame==2.1.0,gTTS
+
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -119,7 +120,7 @@ android.ndk = 21e
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+android.ndk_path = /home/hadeel/.buildozer/android/platform/android-ndk-r25b
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
@@ -349,7 +350,7 @@ p4a.bootstrap = sdl2
 #p4a.setup_py = false
 
 # (str) extra command line arguments to pass when invoking pythonforandroid.toolchain
-p4a.extra_args = --env CFLAGS="-I/usr/include/python3.10"
+#p4a.extra_args = --env CFLAGS="-I/usr/include/python3.10"
 
 
 
@@ -450,3 +451,4 @@ warn_on_root = 1
 #    Then, invoke the command line with the "demo" profile:
 #
 #buildozer --profile demo android debug
+android.local_recipes = ~/.buildozer/android/packages/
