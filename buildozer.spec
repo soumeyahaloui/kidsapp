@@ -7,7 +7,7 @@ source.dir = src
 source.include_exts = py,png,jpg,kv,atlas
 source.include_patterns = *.png, *.jpg, audio/*.mp3
 version = 0.1
-requirements = python3==3.10.0,kivy,pygame==2.1.0,gTTS
+requirements = python3==3.10.0,kivy,gTTS
 icon.filename = assets/images/icon/appkidicon.png
 orientation = portrait
 android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
