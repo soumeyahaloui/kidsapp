@@ -7,11 +7,8 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
+from kivy.core.audio import SoundLoader
 from kivy.resources import resource_find
-from gtts import gTTS
-import pygame
-import os
-
 
 class FirstScreen(Screen):
     def __init__(self, **kwargs):
@@ -38,7 +35,6 @@ class FirstScreen(Screen):
 
     def go_to_second_screen(self, instance):
         self.manager.current = 'second'
-
 
 class SecondScreen(Screen):
     def __init__(self, **kwargs):
@@ -79,13 +75,9 @@ class SecondScreen(Screen):
         if instance.text == "Animals":
             self.manager.current = 'animals'
 
-
 class AnimalScreen(Screen):
     def __init__(self, **kwargs):
         super(AnimalScreen, self).__init__(**kwargs)
-
-        # Initialize pygame mixer
-        pygame.mixer.init()
 
         # Background image (galaxy.png)
         bg = AsyncImage(source='assets/images/backgrounds/galaxy.png', allow_stretch=True, keep_ratio=False)
@@ -110,48 +102,38 @@ class AnimalScreen(Screen):
 
         # Add a card for each animal
         for animal in animals:
-            # Layout for each animal row
             row_layout = BoxLayout(orientation='horizontal', size_hint=(1, None), height=90, spacing=5)
 
-            # Image of the animal
+            # Animal Image
             img = AsyncImage(source=animal['image'], size_hint=(None, None), size=(70, 70))
             row_layout.add_widget(img)
 
-            # Audio buttons
-            button_layout = BoxLayout(orientation='vertical', size_hint=(None, None), spacing=2, width=60)
+            # Audio Buttons
+            button_layout = BoxLayout(orientation='vertical', spacing=2, size_hint=(None, None), width=60)
             audio_ar_button = Button(text="🔊 AR", size_hint=(None, None), size=(50, 25))
             audio_ar_button.bind(on_press=lambda x, audio=animal["audio_ar"]: self.play_audio(audio))
             audio_fr_button = Button(text="🔊 FR", size_hint=(None, None), size=(50, 25))
             audio_fr_button.bind(on_press=lambda x, audio=animal["audio_fr"]: self.play_audio(audio))
             button_layout.add_widget(audio_ar_button)
             button_layout.add_widget(audio_fr_button)
-            row_layout.add_widget(button_layout)
 
-            # Add the row layout to the main layout
+            row_layout.add_widget(button_layout)
             main_layout.add_widget(row_layout)
 
     def play_audio(self, audio_file):
         try:
-            # Use resource_find to get the correct file path
             audio_path = resource_find(audio_file)
             if not audio_path:
                 print(f"Audio file not found: {audio_file}")
                 return
-
-            # Stop any ongoing audio
-            pygame.mixer.music.stop()
-
-            # Load and play the audio file
-            pygame.mixer.music.load(audio_path)
-            pygame.mixer.music.play()
-
-            # Wait until the audio finishes playing
-            while pygame.mixer.music.get_busy():
-                continue
-
+            
+            sound = SoundLoader.load(audio_path)
+            if sound:
+                sound.play()
+            else:
+                print(f"Failed to load sound: {audio_file}")
         except Exception as e:
             print(f"Error playing audio: {e}")
-
 
 class MyApp(App):
     def build(self):
@@ -162,7 +144,6 @@ class MyApp(App):
 
         self.icon = 'assets/images/icon/appkidicon.png'
         return sm
-
 
 if __name__ == '__main__':
     MyApp().run()
