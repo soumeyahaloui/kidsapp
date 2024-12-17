@@ -4,10 +4,10 @@ title = My Application
 package.name = myapp
 package.domain = org.test
 source.dir = src
-source.include_exts = py,png,jpg,kv,atlas
-source.include_patterns = *.png, *.jpg, audio/*.mp3
+source.include_exts = py,png,jpg,kv,atlas,mp3
+source.include_patterns = assets/*.png, assets/*.jpg, assets/audio/ar/*.mp3, assets/audio/fr/*.mp3
 version = 0.1
-requirements = python3==3.10.0,kivy,gTTS
+requirements = python3==3.10.0, kivy, requests
 icon.filename = assets/images/icon/appkidicon.png
 orientation = portrait
 android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
